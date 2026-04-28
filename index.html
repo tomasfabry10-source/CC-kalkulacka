@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coca-Cola Sales Mate 2.0</title>
+    <title>COCA-COLA C&M KALKULAČKA</title>
     <style>
         :root {
             --brand-red: #F40000;
@@ -27,14 +27,13 @@
         }
 
         .app-container {
-            max-width: 440px;
+            max-width: 850px;
             margin: 0 auto;
             padding: 20px 10px 40px 10px;
             position: relative;
             z-index: 2;
         }
 
-        /* --- Header --- */
         header {
             text-align: center;
             color: white;
@@ -46,17 +45,11 @@
             font-size: 26px;
             line-height: 1.2;
             font-weight: 800;
-            margin: 0 0 8px 0;
+            margin: 0;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            text-transform: uppercase;
         }
 
-        .subtitle {
-            font-size: 14px;
-            opacity: 0.9;
-            font-weight: 400;
-        }
-
-        /* --- Cards --- */
         .card {
             background: #fff;
             border-radius: var(--card-radius);
@@ -67,50 +60,6 @@
             z-index: 2;
         }
 
-        .card-img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            display: block;
-            background-color: #eee; /* Fallback color */
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card h2 {
-            color: var(--brand-red);
-            font-size: 20px;
-            margin: 0 0 12px 0;
-            font-weight: 800;
-        }
-
-        .card p {
-            font-size: 14px;
-            line-height: 1.5;
-            color: #444;
-            margin-bottom: 15px;
-        }
-
-        ul {
-            padding-left: 18px;
-            margin: 0;
-        }
-
-        li {
-            font-size: 13px;
-            line-height: 1.5;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        strong {
-            font-weight: 700;
-            color: #000;
-        }
-
-        /* --- Calculator Specifics --- */
         .calc-header {
             background: #f4f4f4;
             text-align: center;
@@ -124,48 +73,44 @@
             font-size: 16px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .calc-grid {
             display: flex;
             width: 100%;
+            flex-wrap: wrap;
         }
 
         .calc-col {
             flex: 1;
-            padding: 15px 5px;
+            min-width: 260px;
+            padding: 15px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        .calc-col:first-child {
             border-right: 1px solid #eee;
+            box-sizing: border-box;
         }
 
-        /* Icons */
-        .icon-area {
-            height: 70px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
+        .calc-col:last-child {
+            border-right: none;
         }
 
         .col-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
-            margin-top: 5px;
+            margin-bottom: 15px;
             text-align: center;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
         }
         
         .title-grey { color: #888; }
         .title-red { color: var(--brand-red); }
+        .title-orange { color: #e67e22; }
 
-        /* Inputs & Rows */
         .input-group {
             width: 100%;
             margin-bottom: 8px;
@@ -179,15 +124,15 @@
             color: #888;
             margin-bottom: 2px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 600;
+            text-align: center;
         }
 
         .label-highlight {
             color: var(--brand-red);
-            font-weight: 700;
         }
 
-        input[type="number"] {
+        input[type="number"], select {
             width: 100%;
             box-sizing: border-box;
             border: 1px solid #ddd;
@@ -197,53 +142,42 @@
             font-weight: 700;
             color: #000;
             outline: none;
-            -moz-appearance: textfield;
             text-align: center;
-        }
-        input[type="number"]:focus {
-            border-color: var(--brand-red);
-            background-color: #fff0f0;
+            background: white;
         }
 
-        /* Read-only fields */
+        input:focus, select:focus {
+            border-color: var(--brand-red);
+            background-color: #fffafb;
+        }
+
         .unit-profit-display {
-            background: #eee;
-            color: #555;
+            background: #f0f0f0;
+            color: #444;
             padding: 6px;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
             text-align: center;
             border: 1px solid #ddd;
         }
 
-        .promo-hint {
-            font-size: 10px;
-            color: var(--brand-red);
-            text-align: right;
-            display: block;
-            margin-top: 2px;
-            font-weight: 600;
-        }
-
         .calc-divider {
-            width: 80%;
+            width: 90%;
             height: 1px;
-            background: #eee;
+            background: #f0f0f0;
             margin: 10px 0;
         }
 
-        /* --- RESULT BOX STYLING --- */
         .result-box {
-            background: #f9f9f9; 
-            width: 96%;
-            border-radius: 10px;
-            padding: 15px 5px;
+            background: #fdfdfd; 
+            width: 100%;
+            border-radius: 12px;
+            padding: 12px 5px;
             text-align: center;
             margin-top: 15px;
             box-sizing: border-box;
             border: 1px solid #eee;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .result-label {
@@ -251,74 +185,61 @@
             font-size: 10px;
             color: #999;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .result-value {
-            font-size: 22px;
+            font-size: 19px;
             font-weight: 900;
-            color: #555;
+            color: #333;
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .result-value.red {
-            color: var(--brand-red); 
-            font-size: 24px;
-        }
+        .result-value.red { color: var(--brand-red); }
 
         .sub-results {
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid #f0f0f0;
             padding-top: 8px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
         }
 
         .sub-row {
-            font-size: 11px;
+            font-size: 10px;
             color: #666;
             display: flex;
-            justify-content: space-between;
-            padding: 0 4px;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.4;
         }
         
-        .sub-row strong {
-            color: #333;
-        }
+        .sub-row strong { color: #222; font-size: 11px; }
+        .info-detail { font-size: 9px; color: #888; font-style: italic; }
 
-        /* Bottom Red Banner */
         .banner {
             background: var(--brand-red);
             color: white;
             text-align: center;
-            padding: 25px 15px;
+            padding: 20px 15px;
             margin: 0;
             position: relative;
-            overflow: hidden;
         }
         
-        .banner-text-small {
+        .banner-line {
+            display: block;
             font-size: 14px;
             font-weight: 600;
-            display: block;
-            position: relative; z-index: 2;
+            margin-bottom: 5px;
         }
 
-        .banner-amount {
-            font-size: 28px;
+        .banner-line strong {
+            font-size: 20px;
             font-weight: 900;
-            display: block;
-            margin: 5px 0;
-            position: relative; z-index: 2;
+            text-decoration: underline;
         }
 
-        /* SVG Shapes */
-        .heart-shape { width: 60px; height: 50px; fill: var(--brand-red); }
-        .cup-shape { width: 35px; height: 45px; fill: #bbb; }
-
-        /* Bubbles Animation Background */
         .bubbles-container {
             position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%;
@@ -330,17 +251,19 @@
         .bubble {
             position: absolute;
             bottom: -50px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             animation: rise infinite ease-in;
-            box-shadow: 0 0 10px rgba(255,255,255,0.1);
         }
 
         @keyframes rise {
             0% { bottom: -50px; transform: translateX(0); opacity: 0; }
             20% { opacity: 1; }
-            50% { transform: translateX(20px); }
             100% { bottom: 110vh; transform: translateX(-20px); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .calc-col { border-right: none; border-bottom: 1px solid #eee; }
         }
 
     </style>
@@ -352,40 +275,43 @@
     <div class="app-container">
         
         <header>
-            <h1>Coca-Cola Sales Mate<br>2.0</h1>
-            <div class="subtitle">Interaktivní nástroj pro B2B partnery</div>
+            <h1>COCA-COLA C&M KALKULAČKA</h1>
         </header>
 
         <div class="card" style="padding-bottom: 0;">
             <div class="calc-header">
-                <h3>Kalkulace zisku</h3>
+                <h3>Kalkulace ziskovosti</h3>
             </div>
 
             <div class="calc-grid">
                 <div class="calc-col">
-                    <div class="icon-area">
-                        <svg viewBox="0 0 24 24" class="cup-shape">
-                            <path d="M18.32,4.96C18.21,4.23,17.57,3.69,16.83,3.69H15.28l1.37-2.65C16.82,0.72,16.57,0.34,16.24,0.17C15.91,0,15.51,0.11,15.34,0.43L13.82,3.37l0,0H7.17l0,0L5.66,0.43C5.49,0.11,5.09,0,4.76,0.17C4.43,0.34,4.18,0.72,4.35,1.04l1.37,2.65H4.17C3.43,3.69,2.79,4.23,2.68,4.96L0.9,17.39C0.8,18.09,1.34,18.72,2.05,18.72h1.16l1.3,4.55C4.65,23.78,5.12,24.14,5.66,24.14h9.68c0.54,0,1.01-0.36,1.15-0.87l1.3-4.55h1.16c0.71,0,1.25-0.63,1.15-1.33L18.32,4.96z M6.43,21.97l-0.96-3.37h10.06l-0.96,3.37H6.43z M17.06,17.22H3.94l1.66-11.61h9.8L17.06,17.22z" fill="#ccc"/>
-                        </svg>
-                        <div class="col-title title-grey">BĚŽNÁ LIMONÁDA</div>
+                    <div class="col-title title-grey">BĚŽNÁ LAHVIČKOVÁ<br>LIMONÁDA</div>
+
+                    <div class="input-group">
+                        <label>Obsah lahvičky</label>
+                        <select id="gen_vol" onchange="recalc()">
+                            <option value="0.2">0,2 L</option>
+                            <option value="0.25">0,25 L</option>
+                            <option value="0.3">0,3 L</option>
+                            <option value="0.33" selected>0,33 L</option>
+                            <option value="0.5">0,5 L</option>
+                        </select>
                     </div>
 
                     <div class="input-group">
-                        <label>Prodané ks (Peak/den)</label>
-                        <input type="number" id="gen_units_peak" value="60" oninput="recalc()">
+                        <label>Kusy (Peak/den)</label>
+                        <input type="number" id="gen_units_peak" value="40" oninput="recalc()">
                     </div>
-                     <div class="input-group">
+                    <div class="input-group">
                         <label class="label-highlight">Zisk na ks (Peak)</label>
                         <div class="unit-profit-display" id="gen_unit_profit_peak">0,00 Kč</div>
                     </div>
 
-                    <div class="calc-divider"></div>
-
                     <div class="input-group">
-                        <label>Prodané ks (Mimo/den)</label>
-                        <input type="number" id="gen_units_off" value="40" oninput="recalc()">
+                        <label>Kusy (Mimo/den)</label>
+                        <input type="number" id="gen_units_off" value="20" oninput="recalc()">
                     </div>
-                     <div class="input-group">
+                    <div class="input-group">
                         <label class="label-highlight">Zisk na ks (Mimo)</label>
                         <div class="unit-profit-display" id="gen_unit_profit_off">0,00 Kč</div>
                     </div>
@@ -393,67 +319,60 @@
                     <div class="calc-divider"></div>
 
                     <div class="input-group">
-                        <label>Prod. cena (Peak)</label>
-                        <input type="number" step="0.01" id="gen_sell_peak" value="29.00" oninput="recalc()">
+                        <label>Cena (Peak)</label>
+                        <input type="number" id="gen_sell_peak" value="39.00" oninput="recalc()">
                     </div>
                     <div class="input-group">
-                        <label>Prod. cena (Mimo)</label>
-                        <input type="number" step="0.01" id="gen_sell_off" value="25.00" oninput="recalc()">
+                        <label>Cena (Mimo)</label>
+                        <input type="number" id="gen_sell_off" value="35.00" oninput="recalc()">
                     </div>
-
                     <div class="input-group">
                         <label>Nákup (vč. bonusu)</label>
-                        <input type="number" step="0.01" id="gen_buy" value="10.00" oninput="recalc()">
+                        <input type="number" id="gen_buy" value="15.00" oninput="recalc()">
                     </div>
-
                     <div class="input-group">
                         <label>Promoce (%)</label>
-                        <input type="number" step="0.1" id="gen_promo" value="0" oninput="recalc()">
-                        <span class="promo-hint" id="gen_promo_hint">Bonus: 0,00 Kč</span>
+                        <input type="number" id="gen_promo" value="0" oninput="recalc()">
                     </div>
 
                     <div class="result-box">
                         <span class="result-label">DENNÍ ZISK:</span>
-                        <span class="result-value" id="gen_daily">0,00 Kč</span>
-                        
+                        <span class="result-value" id="gen_daily">0 Kč</span>
                         <div class="sub-results">
-                            <div class="sub-row">
-                                <span>Měsíčně:</span>
-                                <strong id="gen_monthly">0 Kč</strong>
-                            </div>
-                            <div class="sub-row">
-                                <span>Ročně:</span>
-                                <strong id="gen_yearly">0 Kč</strong>
-                            </div>
+                            <div class="sub-row">Měsíčně: <strong id="gen_monthly">0 Kč</strong></div>
+                            <div class="sub-row">Celkový výnos: <strong id="gen_total_rev">0 Kč</strong><span class="info-detail" id="gen_bottle_count"></span></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="calc-col">
-                    <div class="icon-area">
-                        <svg viewBox="0 0 100 90" class="heart-shape">
-                             <path d="M50,88 C50,88 12.5,57.5 5,32.5 C-2.5,7.5 27.5,-7.5 50,17.5 C72.5,-7.5 102.5,7.5 95,32.5 C87.5,57.5 50,88 50,88 Z" fill="#F40000"/>
-                             <text x="50" y="50" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-style="italic" font-size="14">Coca-Cola</text>
-                        </svg>
-                        <div class="col-title title-red">COCA-COLA</div>
+                    <div class="col-title title-red">COCA-COLA<br>(LOVEBRAND)</div>
+
+                    <div class="input-group">
+                        <label>Obsah lahvičky</label>
+                        <select id="cc_vol" onchange="recalc()">
+                            <option value="0.2">0,2 L</option>
+                            <option value="0.25">0,25 L</option>
+                            <option value="0.3">0,3 L</option>
+                            <option value="0.33" selected>0,33 L</option>
+                            <option value="0.5">0,5 L</option>
+                        </select>
                     </div>
 
-                     <div class="input-group">
-                        <label>Prodané ks (Peak/den)</label>
-                        <input type="number" id="cc_units_peak" value="100" oninput="recalc()">
+                    <div class="input-group">
+                        <label>Kusy (Peak/den)</label>
+                        <input type="number" id="cc_units_peak" value="60" oninput="recalc()">
                     </div>
-                     <div class="input-group">
+                    <div class="input-group">
                         <label class="label-highlight">Zisk na ks (Peak)</label>
                         <div class="unit-profit-display" id="cc_unit_profit_peak">0,00 Kč</div>
                     </div>
 
-                    <div class="calc-divider"></div>
-
                     <div class="input-group">
-                        <label>Prodané ks (Mimo/den)</label>
-                        <input type="number" id="cc_units_off" value="50" oninput="recalc()">
+                        <label>Kusy (Mimo/den)</label>
+                        <input type="number" id="cc_units_off" value="30" oninput="recalc()">
                     </div>
-                     <div class="input-group">
+                    <div class="input-group">
                         <label class="label-highlight">Zisk na ks (Mimo)</label>
                         <div class="unit-profit-display" id="cc_unit_profit_off">0,00 Kč</div>
                     </div>
@@ -461,178 +380,197 @@
                     <div class="calc-divider"></div>
 
                     <div class="input-group">
-                        <label>Prod. cena (Peak)</label>
-                        <input type="number" step="0.01" id="cc_sell_peak" value="49.90" oninput="recalc()">
+                        <label>Cena (Peak)</label>
+                        <input type="number" id="cc_sell_peak" value="55.00" oninput="recalc()">
                     </div>
                     <div class="input-group">
-                        <label>Prod. cena (Mimo)</label>
-                        <input type="number" step="0.01" id="cc_sell_off" value="45.50" oninput="recalc()">
+                        <label>Cena (Mimo)</label>
+                        <input type="number" id="cc_sell_off" value="49.00" oninput="recalc()">
                     </div>
-
                     <div class="input-group">
                         <label>Nákup (vč. bonusu)</label>
-                        <input type="number" step="0.01" id="cc_buy" value="30.00" oninput="recalc()">
+                        <input type="number" id="cc_buy" value="28.00" oninput="recalc()">
                     </div>
-
                     <div class="input-group">
                         <label>Promoce (%)</label>
-                        <input type="number" step="0.1" id="cc_promo" value="10" oninput="recalc()">
-                        <span class="promo-hint" id="cc_promo_hint">Bonus: 0,00 Kč</span>
+                        <input type="number" id="cc_promo" value="10" oninput="recalc()">
                     </div>
 
                     <div class="result-box">
                         <span class="result-label">DENNÍ ZISK:</span>
-                        <span class="result-value red" id="cc_daily">0,00 Kč</span>
-
+                        <span class="result-value red" id="cc_daily">0 Kč</span>
                         <div class="sub-results">
-                            <div class="sub-row">
-                                <span>Měsíčně:</span>
-                                <strong id="cc_monthly">0 Kč</strong>
-                            </div>
-                            <div class="sub-row">
-                                <span>Ročně:</span>
-                                <strong id="cc_yearly">0 Kč</strong>
-                            </div>
+                            <div class="sub-row">Měsíčně: <strong id="cc_monthly">0 Kč</strong></div>
+                            <div class="sub-row">Celkový výnos: <strong id="cc_total_rev">0 Kč</strong><span class="info-detail" id="cc_bottle_count"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-col">
+                    <div class="col-title title-orange">BĚŽNÁ TOČENÁ<br>LIMONÁDA</div>
+
+                    <div class="input-group">
+                        <label>Obsah sklenice</label>
+                        <select id="dra_vol" onchange="recalc()">
+                            <option value="0.2">0,2 L</option>
+                            <option value="0.25">0,25 L</option>
+                            <option value="0.3" selected>0,3 L</option>
+                            <option value="0.33">0,33 L</option>
+                            <option value="0.5">0,5 L</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Kusy (Peak/den)</label>
+                        <input type="number" id="dra_units_peak" value="50" oninput="recalc()">
+                    </div>
+                    <div class="input-group">
+                        <label class="label-highlight">Zisk na ks (Peak)</label>
+                        <div class="unit-profit-display" id="dra_unit_profit_peak">0,00 Kč</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Kusy (Mimo/den)</label>
+                        <input type="number" id="dra_units_off" value="20" oninput="recalc()">
+                    </div>
+                    <div class="input-group">
+                        <label class="label-highlight">Zisk na ks (Mimo)</label>
+                        <div class="unit-profit-display" id="dra_unit_profit_off">0,00 Kč</div>
+                    </div>
+
+                    <div class="calc-divider"></div>
+
+                    <div class="input-group">
+                        <label>Cena (Peak)</label>
+                        <input type="number" id="dra_sell_peak" value="35.00" oninput="recalc()">
+                    </div>
+                    <div class="input-group">
+                        <label>Cena (Mimo)</label>
+                        <input type="number" id="dra_sell_off" value="30.00" oninput="recalc()">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Nákup sudu</label>
+                        <input type="number" id="dra_buy" value="1200.00" oninput="recalc()">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Obsah sudu</label>
+                        <select id="dra_keg" onchange="recalc()">
+                            <option value="20">20L KEG</option>
+                            <option value="30" selected>30L KEG</option>
+                            <option value="50">50L KEG</option>
+                        </select>
+                    </div>
+
+                    <div class="result-box">
+                        <span class="result-label">DENNÍ ZISK:</span>
+                        <span class="result-value" id="dra_daily">0 Kč</span>
+                        <div class="sub-results">
+                            <div class="sub-row">Měsíčně: <strong id="dra_monthly">0 Kč</strong></div>
+                            <div class="sub-row">Celkový výnos z 1 sudu: <strong id="dra_total_rev">0 Kč</strong></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="banner">
-                <div class="bubbles-container" style="opacity: 0.3; height: 100%;">
-                    <div class="bubble" style="left: 10%; width: 10px; height: 10px; animation-duration: 4s;"></div>
-                    <div class="bubble" style="left: 80%; width: 15px; height: 15px; animation-duration: 6s;"></div>
-                </div>
-                <span class="banner-text-small">S Coca-Colou vyděláte o</span>
-                <span class="banner-amount" id="diff_total">+ 0,00 Kč</span>
-                <span class="banner-text-small">denně více!</span>
+                <span class="banner-line">S Coca-Colou vyděláte o <strong id="diff_gen">0 Kč</strong> denně více než s lahvičkou!</span>
+                <span class="banner-line">S Coca-Colou vyděláte o <strong id="diff_dra">0 Kč</strong> denně více než s točenou!</span>
             </div>
         </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Friends" class="card-img">
-            <div class="card-content">
-                <h2>Emoce & Symbolika</h2>
-                <p>Proč zákazníci milují Coca-Colu? Není to jen nápoj, je to pocit.</p>
-                <ul>
-                    <li><strong>Autenticita:</strong> Originál, který nelze napodobit.</li>
-                    <li><strong>Nostalgie:</strong> Spojení s Vánocemi a rodinou.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Can" class="card-img">
-            <div class="card-content">
-                <h2>Kvalita & Jistota</h2>
-                <p>Zákazník platí za jistotu, že dostane přesně to, na co má chuť.</p>
-                <ul>
-                    <li><strong>Konzistentní chuť:</strong> Stejná po celém světě.</li>
-                    <li><strong>Perfect Serve:</strong> Ikonická láhev = vyšší hodnota.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Hands and Nature" class="card-img">
-            <div class="card-content">
-                <h2>Odpovědnost</h2>
-                <ul>
-                    <li><strong>Ekologie:</strong> Snižování plastů, recyklace.</li>
-                    <li><strong>Komunita:</strong> Podpora lokálních projektů.</li>
-                </ul>
-            </div>
-        </div>
-
     </div>
 
     <script>
-        // JS Bubble Generator
-        const bgContainer = document.getElementById('bg-bubbles');
         function createBubbles() {
-            for(let i = 0; i < 25; i++) {
+            const container = document.getElementById('bg-bubbles');
+            for(let i = 0; i < 20; i++) {
                 const b = document.createElement('div');
                 b.className = 'bubble';
                 b.style.left = Math.random() * 100 + '%';
-                const size = Math.random() * 40 + 10; 
+                const size = Math.random() * 30 + 10; 
                 b.style.width = size + 'px';
                 b.style.height = size + 'px';
-                b.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                b.style.animationDelay = (Math.random() * 10) + 's';
-                bgContainer.appendChild(b);
+                b.style.animationDuration = (Math.random() * 8 + 4) + 's';
+                container.appendChild(b);
             }
         }
         createBubbles();
-
-        // Calculator Logic
-        function recalc() {
-            calculateColumn('gen'); // Generic
-            calculateColumn('cc');  // Coca-Cola
-            
-            // Banner Diff Calculation - Now DAILY based
-            const genDaily = parseMoney(document.getElementById('gen_daily').innerText);
-            const ccDaily = parseMoney(document.getElementById('cc_daily').innerText);
-            const diff = ccDaily - genDaily;
-            
-            const diffEl = document.getElementById('diff_total');
-            diffEl.innerText = (diff > 0 ? "+ " : "") + formatMoney(diff);
-        }
-
-        function calculateColumn(prefix) {
-            // Inputs
-            const unitsPeak = getVal(prefix + '_units_peak');
-            const unitsOff = getVal(prefix + '_units_off');
-            const sellPeak = getVal(prefix + '_sell_peak');
-            const sellOff = getVal(prefix + '_sell_off');
-            const buyPrice = getVal(prefix + '_buy');
-            const promoPercent = getVal(prefix + '_promo');
-
-            // Logic: Effective Buy Price = BuyPrice - (BuyPrice * (Percent / 100))
-            const promoAmount = buyPrice * (promoPercent / 100);
-            const effectiveBuyPrice = buyPrice - promoAmount;
-
-            // Hint update
-            document.getElementById(prefix + '_promo_hint').innerText = "Bonus: " + formatMoney(promoAmount);
-
-            // Unit Profit Calculation
-            const profitPerUnitPeak = sellPeak - effectiveBuyPrice;
-            const profitPerUnitOff = sellOff - effectiveBuyPrice;
-
-            // Update Unit Profit Displays
-            document.getElementById(prefix + '_unit_profit_peak').innerText = formatMoney(profitPerUnitPeak);
-            document.getElementById(prefix + '_unit_profit_off').innerText = formatMoney(profitPerUnitOff);
-
-            // Time-based Profits
-            // Daily Profit
-            const dailyProfit = (profitPerUnitPeak * unitsPeak) + (profitPerUnitOff * unitsOff);
-            
-            // Monthly (x30) and Yearly (x365)
-            const monthlyProfit = dailyProfit * 30;
-            const yearlyProfit = dailyProfit * 365;
-
-            // Update DOM
-            document.getElementById(prefix + '_daily').innerText = formatMoney(dailyProfit);
-            document.getElementById(prefix + '_monthly').innerText = formatMoney(monthlyProfit, 0);
-            document.getElementById(prefix + '_yearly').innerText = formatMoney(yearlyProfit, 0);
-        }
 
         function getVal(id) {
             return parseFloat(document.getElementById(id).value) || 0;
         }
 
-        function formatMoney(n, decimals = 2) {
-            return n.toLocaleString('cs-CZ', {
-                minimumFractionDigits: decimals,
-                maximumFractionDigits: decimals
-            }) + " Kč";
+        function formatMoney(n) {
+            return n.toLocaleString('cs-CZ', { maximumFractionDigits: 0 }) + " Kč";
         }
 
-        function parseMoney(str) {
-            const clean = str.replace(/\s/g, '').replace('Kč', '').replace(',', '.');
-            return parseFloat(clean) || 0;
+        function recalc() {
+            const kegVol = getVal('dra_keg');
+
+            // --- 1. TOČENÁ LOGIKA ---
+            const draVol = getVal('dra_vol');
+            const draBuyRaw = getVal('dra_buy');
+            const draUnitsPerKeg = kegVol / draVol;
+            const draCostPerUnit = draBuyRaw / draUnitsPerKeg;
+            
+            const draUnitsPeak = getVal('dra_units_peak');
+            const draUnitsOff = getVal('dra_units_off');
+            const draSellPeak = getVal('dra_sell_peak');
+            const draSellOff = getVal('dra_sell_off');
+
+            const draProfitPeak = draSellPeak - draCostPerUnit;
+            const draProfitOff = draSellOff - draCostPerUnit;
+            const draDaily = (draProfitPeak * draUnitsPeak) + (draProfitOff * draUnitsOff);
+            
+            document.getElementById('dra_unit_profit_peak').innerText = draProfitPeak.toFixed(2) + " Kč";
+            document.getElementById('dra_unit_profit_off').innerText = draProfitOff.toFixed(2) + " Kč";
+            document.getElementById('dra_daily').innerText = formatMoney(draDaily);
+            document.getElementById('dra_monthly').innerText = formatMoney(draDaily * 30);
+            
+            const draTotalYield = (draUnitsPerKeg * ((draSellPeak + draSellOff) / 2)) - draBuyRaw;
+            document.getElementById('dra_total_rev').innerText = formatMoney(draTotalYield);
+
+            // --- 2. LAHVIČKOVÉ LOGIKY ---
+            const genDaily = calcBottle('gen', kegVol);
+            const ccDaily = calcBottle('cc', kegVol);
+
+            // --- 3. BANNER SROVNÁNÍ ---
+            document.getElementById('diff_gen').innerText = formatMoney(ccDaily - genDaily);
+            document.getElementById('diff_dra').innerText = formatMoney(ccDaily - draDaily);
         }
 
-        // Init
+        function calcBottle(prefix, kegVol) {
+            const vol = getVal(prefix + '_vol');
+            const unitsPeak = getVal(prefix + '_units_peak');
+            const unitsOff = getVal(prefix + '_units_off');
+            const sellPeak = getVal(prefix + '_sell_peak');
+            const sellOff = getVal(prefix + '_sell_off');
+            const buyRaw = getVal(prefix + '_buy');
+            const promo = getVal(prefix + '_promo');
+            
+            const buyEff = buyRaw * (1 - promo/100);
+
+            const profitPeak = sellPeak - buyEff;
+            const profitOff = sellOff - buyEff;
+            const daily = (profitPeak * unitsPeak) + (profitOff * unitsOff);
+
+            document.getElementById(prefix + '_unit_profit_peak').innerText = profitPeak.toFixed(2) + " Kč";
+            document.getElementById(prefix + '_unit_profit_off').innerText = profitOff.toFixed(2) + " Kč";
+            document.getElementById(prefix + '_daily').innerText = formatMoney(daily);
+            document.getElementById(prefix + '_monthly').innerText = formatMoney(daily * 30);
+
+            // Počet lahviček vs Keg
+            const bottlesInKeg = Math.ceil(kegVol / vol);
+            const avgProfit = (profitPeak + profitOff) / 2;
+            const totalRev = bottlesInKeg * avgProfit;
+            
+            document.getElementById(prefix + '_total_rev').innerText = formatMoney(totalRev);
+            document.getElementById(prefix + '_bottle_count').innerText = `(${bottlesInKeg} ks lahví na ${kegVol}L objem)`;
+
+            return daily;
+        }
+
         recalc();
     </script>
 </body>

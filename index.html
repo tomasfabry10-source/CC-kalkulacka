@@ -8,8 +8,9 @@
         :root {
             --brand-red: #F40000;
             --brand-dark: #D10000;
-            --bg-gradient-start: #ff0000;
-            --bg-gradient-end: #b30000;
+            /* Změna pozadí na černé */
+            --bg-gradient-start: #000000;
+            --bg-gradient-end: #1a1a1a;
             --text-main: #222;
             --text-grey: #666;
             --card-radius: 18px;
@@ -251,9 +252,12 @@
         .bubble {
             position: absolute;
             bottom: -50px;
-            background: rgba(255, 255, 255, 0.15);
+            /* Změna na zlatou barvu */
+            background: rgba(255, 215, 0, 0.4);
             border-radius: 50%;
             animation: rise infinite ease-in;
+            /* Zlatý odlesk */
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
         }
 
         @keyframes rise {
